@@ -14,11 +14,10 @@ interface MutationData {
 
 const UserCommunityRelationshipManager = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
-  const [selectedCommunity, setSelectedCommunity] = useState<string | null>(
-    null
-  );
+  const [selectedCommunity, setSelectedCommunity] = useState<string | null>(null);
   const [toggle, setToggle] = useState(false);
   const [leaderboardKey, setLeaderboardKey] = useState(0);
+  
   const { data: users, isLoading: usersLoading } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
@@ -41,17 +40,14 @@ const UserCommunityRelationshipManager = () => {
       setLeaderboardKey((prevKey) => prevKey + 1);
     },
     onError: (error: any) => {
-      if (
-        error.response &&
-        error.response.status === 400 &&
-        error.response.data.message
-      ) {
+      if (error.response && error.response.status === 400 && error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error(`Error: ${error.message}`);
       }
     },
   });
+
   const leaveMutation = useMutation({
     mutationFn: (data: MutationData) =>
       axios.delete(
@@ -62,11 +58,7 @@ const UserCommunityRelationshipManager = () => {
       setLeaderboardKey((prevKey) => prevKey + 1);
     },
     onError: (error: any) => {
-      if (
-        error.response &&
-        error.response.status === 400 &&
-        error.response.data.message
-      ) {
+      if (error.response && error.response.status === 400 && error.response.data.message) {
         toast.error(error.response.data.message);
       } else {
         toast.error(`Error: ${error.message}`);

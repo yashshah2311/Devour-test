@@ -2,14 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./CommunityLeaderboard.css";
 
-const CommunityLeaderboard = ({
-  leaderboardKey,
-}: {
-  leaderboardKey: number;
-}) => {
-  const [leaderboard, setLeaderboard] = useState<
-    { logo: string; name: string; totalPoints: number; userCount: number }[]
-  >([]);
+const CommunityLeaderboard = ({leaderboardKey}: { leaderboardKey: number}) => {
+  const [leaderboard, setLeaderboard] = useState<{ logo: string; name: string; totalPoints: number; userCount: number }[]>([]);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
